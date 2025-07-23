@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7.2
+    container_name: quiz_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: quiz_bot
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - redis
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: quiz_web
+    restart: always
+    env_file:
+      - .env
+    command: python web_stats.py
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis

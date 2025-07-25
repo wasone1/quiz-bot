@@ -5,7 +5,6 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     buildCommand: ""
-    startCommand: "python web_stats.py"
     envVars:
       - key: BOT_TOKEN
         value: ${BOT_TOKEN}
@@ -22,7 +21,6 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     buildCommand: ""
-    startCommand: "python main.py"
     envVars:
       - key: BOT_TOKEN
         value: ${BOT_TOKEN}
@@ -36,3 +34,6 @@ services:
   - type: redis
     name: redis
     plan: free
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: Allow all

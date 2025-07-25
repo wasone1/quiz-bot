@@ -1,5 +1,36 @@
 services:
-  
+  - type: web
+    name: quiz-web
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    buildCommand: ""
+    envVars:
+      - key: BOT_TOKEN
+        value: ${BOT_TOKEN}
+      - key: REDIS_HOST
+        value: redis
+      - key: REDIS_PORT
+        value: 6379
+      - key: REDIS_DB
+        value: 0
+
+  - type: web
+    name: quiz-bot
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    buildCommand: ""
+    envVars:
+      - key: BOT_TOKEN
+        value: ${BOT_TOKEN}
+      - key: REDIS_HOST
+        value: redis
+      - key: REDIS_PORT
+        value: 6379
+      - key: REDIS_DB
+        value: 0
+
   - type: redis
     name: redis
     plan: free

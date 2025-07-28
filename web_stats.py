@@ -1,7 +1,12 @@
+import os
 import asyncio
 from flask import Flask, render_template_string
 from redis.asyncio import Redis
 from config import REDIS_HOST, REDIS_PORT, REDIS_DB
+
+print("Flask стартує!")
+print("REDIS_URL:", os.getenv("REDIS_URL"))
+print("questions.json існує:", os.path.exists("questions.json"))
 
 app = Flask(__name__)
 

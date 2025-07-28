@@ -21,6 +21,7 @@ with open("questions.json", encoding="utf-8") as f:
 # Підключення до Redis
 REDIS_URL = os.getenv("REDIS_URL")
 redis = Redis.from_url(REDIS_URL, decode_responses=True)
+print("Підключення до Redis створено")
 
 # Ключі для Redis
 
@@ -90,6 +91,7 @@ async def cmd_quiz(message: types.Message):
 
 @router.message(F.text & ~F.text.startswith("/"))
 async def handle_answer(message: types.Message):
+    print("Перший запит до Redis")
     q_json = await redis.get(user_question_key(message.from_user.id))
     if not q_json:
         return

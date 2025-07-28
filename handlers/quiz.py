@@ -8,8 +8,9 @@ from aiogram.types import (
     ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove,
     InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 )
+import os
 from redis.asyncio import Redis
-from config import REDIS_HOST, REDIS_PORT, REDIS_DB
+
 
 router = Router()
 
@@ -18,8 +19,8 @@ with open("questions.json", encoding="utf-8") as f:
     QUESTIONS = json.load(f)
 
 # Підключення до Redis
-redis = Redis(host=REDIS_HOST, port=REDIS_PORT,
-              db=REDIS_DB, decode_responses=True)
+REDIS_URL = os.getenv("REDIS_URL")
+redis = Redis.from_url(REDIS_URL, decode_responses=True)
 
 # Ключі для Redis
 

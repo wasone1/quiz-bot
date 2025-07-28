@@ -2,7 +2,7 @@ import os
 import asyncio
 from flask import Flask, render_template_string
 from redis.asyncio import Redis
-from config import REDIS_HOST, REDIS_PORT, REDIS_DB
+# from config import REDIS_HOST, REDIS_PORT, REDIS_DB
 
 print("Flask стартує!")
 print("REDIS_URL:", os.getenv("REDIS_URL"))
@@ -45,8 +45,10 @@ HTML = """
 
 
 async def get_top_users():
-    redis = Redis(host=REDIS_HOST, port=REDIS_PORT,
-                  db=REDIS_DB, decode_responses=True)
+    REDIS_URL = os.getenv("REDIS_URL")
+    print("REDIS_URL у get_top_users:", REDIS_URL)
+    redis = Redis.from_url(REDIS_URL, decode_responses=True)
+    print("Підключення до Redis створено")
     keys = await redis.keys("score:*")
     scores = []
     for key in keys:

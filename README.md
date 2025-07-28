@@ -10,7 +10,7 @@
 - Перегляд свого рахунку (/score)
 - FSM (Finite State Machine) для сценаріїв
 - Redis для зберігання стану та балів
-- Веб-сайт лідерборду - Відкрий у браузері: http://localhost:5000/
+- Веб-сайт лідерборду - Відкрий у браузері: http://practical-success-production.up.railway.app
 
 ## Технології
 
